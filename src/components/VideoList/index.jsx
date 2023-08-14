@@ -22,10 +22,10 @@ function VideoList() {
         <div className='grid gap-4 grid-cols-fluid h-full w-full'>
             {videos.map((video, index) => {
                 return <Link to={`/videos/`+video._id} key={index}>
-                    <div className="video-item rounded-2xl h-96 shadow-lg relative">
+                    <div className="video-item rounded-2xl h-96 shadow-lg relative overflow-hidden">
                         <img className="object-cover w-full h-full rounded-2xl" src={video.thumbnailImageUrl} alt="Card Image" />
                         <div className="absolute inset-x-0 bottom-0 h-16 px-6 py-2 bg-black bg-opacity-50 text-white rounded-2xl">
-                            <div className='text-md'>{video.title}</div>
+                            <div className='text-md'>{video.title.slice(0, 33)+'....'}</div>
                             <div className='font-light text-sm'>{video.user.name}</div>
                         </div>
                     </div>

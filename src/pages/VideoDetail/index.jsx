@@ -74,8 +74,8 @@ function VideoDetail() {
 
 
     return (
-        <div className='h-screen p-4 flex mx-auto'>
-            <div className='left flex-initial w-3/4 h-3/4'>
+        <div className='h-screen p-4 md:flex mx-auto'>
+            <div className='left flex-initial w-full md:w-3/4 md:h-3/4'>
                 <iframe className='w-full h-full' src={video.videoUrl} title="YouTube video player"></iframe>
                 <div className='title font-bold text-2xl mt-4 mb-4'>{video.title}</div>
                 <div className='flex mb-6'>
@@ -85,7 +85,7 @@ function VideoDetail() {
                         <p className='text-sm font-light'>207 followers</p>
                     </div>
                 </div>
-                <div className='new-comment flex-1 mt-10'>
+                <div className='new-comment flex-1 mt-10 hidden md:block'>
                     <input type="text" id='username' name='username' className='p-2 border border-gray-500' placeholder='Username' disabled />
                     <textarea className="w-full p-2" name="new-comment" id="" placeholder='Add a comment...' disabled></textarea>
                     <div className='text-end'>
@@ -94,7 +94,7 @@ function VideoDetail() {
                         </button>
                     </div>
                 </div>
-                <div className='recent-comment'>
+                <div className='recent-comment hidden md:block'>
                     <h3 className='mb-4'>1,001 Comments</h3>
                     <div className='flex mb-6'>
                         <div className='w-10 h-10 rounded-full bg-white'></div>
@@ -112,37 +112,40 @@ function VideoDetail() {
                     </div>
                 </div>
             </div>
-            <div className='right border w-1/4 h-3/4 ml-10 border-gray-500 flex-initial rounded-md'>
-                <div className='live-comments border-b border-gray-500 h-3/4 p-4 overflow-y-scroll flex-col-reverse'>
-                    {comments.map((comment, index) => {
-                        return (
-                            <div className='flex mb-6' key={index}>
-                                <div className='w-6 h-6 rounded-full bg-white'></div>
-                                <div className='ml-4'>
-                                    <p className='text-sm text-gray-400'>{comment.username}<span className='text-white ml-3 text-sm'>{comment.comment}</span></p>
+            <div className='right w-full md:w-2/4 lg:w-1/4 md:ml-10 border-gray-500 flex-initial rounded-md'>
+                <div className='border w-full md:h-3/4'>
+                    <div className='live-comments border-b border-gray-500 h-3/4 p-4 overflow-y-scroll flex-col-reverse'>
+                        {comments.map((comment, index) => {
+                            return (
+                                <div className='flex mb-6' key={index}>
+                                    <div className='w-6 h-6 rounded-full bg-white'></div>
+                                    <div className='ml-4'>
+                                        <p className='text-sm text-gray-400'>{comment.username}<span className='text-white ml-3 text-sm'>{comment.comment}</span></p>
+                                    </div>
                                 </div>
-                            </div>
-                        )
-                    })}
+                            )
+                        })}
 
-                </div>
-                <div className='new-comment h-1/4'>
-                    <input type="text" id='username' name='username' value={currentComment.username} onChange={handleChange} className='w-full p-2 mb-2' placeholder='Username' />
-                    <input className="w-full bg-transparent border-b p-2" value={currentComment.comment} onChange={handleChange} name="comment" id="" placeholder='Add a comment...' />
-                    <div className='text-end'>
-                        <button className="bg-blue-500 hover:bg-blue-700 text-white p-2 m-4 font-bold rounded" onClick={sendComment}>
-                            Send
-                        </button>
+                    </div>
+                    <div className='new-comment h-1/4'>
+                        <input type="text" id='username' name='username' value={currentComment.username} onChange={handleChange} className='w-full p-2 mb-2' placeholder='Username' />
+                        <input className="w-full bg-transparent border-b p-2" value={currentComment.comment} onChange={handleChange} name="comment" id="" placeholder='Add a comment...' />
+                        <div className='text-end m-4'>
+                            <button className="bg-blue-500 hover:bg-blue-700 text-white p-2 font-bold rounded" onClick={sendComment}>
+                                Send
+                            </button>
+                        </div>
                     </div>
                 </div>
 
-                <div className='products flex flex-wrap justify-between mt-10 gap-1'>
+
+                <div className='products flex flex-wrap justify-around mt-10 mb-10 gap-2'>
                     {products.map((product, index) => {
                         return (
-                            <a href={product.productUrl} className="w-1/4 pt-4 rounded overflow-hidden shadow-lg border bg-white text-black mt-2" target='_blank' key={index}>
+                            <a href={product.productUrl} className="w-1/4 md:w-1/3 pt-4 pl-4 pr-4 rounded overflow-hidden shadow-lg border bg-white text-black mt-2" target='_blank' key={index}>
                                 <img className="w-1/2 mx-auto" src={product.productImageUrl} alt="Sunset in the mountains" />
                                 <div className="pb-2 mt-2 text-center">
-                                    <div className="font-bold text-sm mb-2">{product.title}</div>
+                                    <div className="font-bold sm:text-xs text-sm mb-2">{product.title}</div>
                                     <p className="text-gray-700 text-base">
                                         Rp. {product.price}
                                     </p>
